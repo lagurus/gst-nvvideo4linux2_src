@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 typedef struct _GstBufferInfoMeta  GstBufferInfoMeta;
 typedef struct _GstBufferInfo      GstBufferInfo;
 
-#define D_USE_META_STATIC   0
+#define D_USE_META_STATIC   0         // no malloc, static prealocation
 
 /**
  * Holds the motion vector parameters for one complete frame.
@@ -33,7 +33,7 @@ typedef struct metadata_MV_ {
     /** Size of the pMVInfo buffer, in bytes. */
     guint32 bufSize;
     /** Pointer to the buffer containing the motion vectors. */
-    #ifdef D_USE_META_STATIC
+    #ifdef D_USE_META_STATIC    // no malloc, static prealocation
         int        m_nInfoCount;
         MVInfo  rec_mv_info[12000];
     #else

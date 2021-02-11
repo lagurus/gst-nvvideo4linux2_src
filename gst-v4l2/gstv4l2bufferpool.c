@@ -1444,7 +1444,8 @@ static GstFlowReturn gst_v4l2_buffer_pool_dqbuf (GstV4l2BufferPool * pool, GstBu
     if (get_motion_vectors (obj, group->buffer.index, &enc_mv_metadata) == 0)
     {
       guint32 numMVs = enc_mv_metadata.bufSize / sizeof (MVInfo);
-      //MVInfo *pInfo = enc_mv_metadata.pMVInfo;
+
+      //MVInfo *pInfo = enc_mv_metadata.pMVInfo;    // no info on screen
       //g_print ("Num MVs = %d \n", numMVs);
       //for (i = 0; i < numMVs; i++, pInfo++)
       //  g_print ("%d: mv_x=%d mv_y=%d weight=%d\n ", i, pInfo->mv_x,
@@ -1454,10 +1455,6 @@ static GstFlowReturn gst_v4l2_buffer_pool_dqbuf (GstV4l2BufferPool * pool, GstBu
 
       if (p_buffer_info != NULL)
         {
-        //static long g_lCounter = 0;
-        //p_buffer_info->m_lCounter = g_lCounter;
-        //g_lCounter++;
-        
         memset ((void *) &p_buffer_info->m_enc_mv_metadata, 0, sizeof(p_buffer_info->m_enc_mv_metadata));
 
         AllocateMyMetaData( p_buffer_info, &enc_mv_metadata, numMVs );
@@ -2190,15 +2187,6 @@ gst_v4l2_buffer_pool_process (GstV4l2BufferPool * pool, GstBuffer ** buf)
                 buffer_info.m_enc_mv_metadata.pMVInfo = NULL;
                 }
             #endif
-
-            /*GstBufferInfo* my_buff_info = gst_buffer_get_buffer_info_meta( tmp );
-            if (my_buff_info != NULL)
-              {
-              //my_buff_info->m_lCounter += 1;
-              gst_buffer_add_buffer_info_meta( *buf, my_buff_info );
-      
-              gst_buffer_remove_buffer_info_meta( tmp );
-              }*/
             }
           #endif
           

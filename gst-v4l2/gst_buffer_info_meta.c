@@ -170,15 +170,6 @@ GstBufferInfoMeta* gst_buffer_add_buffer_info_meta( GstBuffer *buffer, GstBuffer
     // https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer/html/GstBuffer.html#gst-buffer-add-meta
     gst_buffer_info_meta = (GstBufferInfoMeta *) gst_buffer_add_meta (buffer, GST_BUFFER_INFO_META_INFO, NULL);
 
-    // copy fields to buffer's meta
-    /*if (buffer_info->m_description != NULL)
-        {
-        gst_buffer_info_meta->info.m_description = malloc(strlen(buffer_info->m_description) + 1);
-        strcpy(gst_buffer_info_meta->info.m_description, buffer_info->m_description);
-        }*/
-        
-    //gst_buffer_info_meta->info.m_lCounter = buffer_info->m_lCounter;
-
     #ifdef D_USE_META_STATIC
         gst_buffer_info_meta->info.m_enc_mv_metadata.bufSize        = buffer_info->m_enc_mv_metadata.bufSize;
         gst_buffer_info_meta->info.m_enc_mv_metadata.m_nInfoCount   = buffer_info->m_enc_mv_metadata.m_nInfoCount;
@@ -198,16 +189,6 @@ GstBufferInfoMeta* gst_buffer_add_buffer_info_meta( GstBuffer *buffer, GstBuffer
                 }
             }
     #endif
-
-    //memcpy( &gst_buffer_info_meta->info.m_enc_mv_metadata, &buffer_info->m_enc_mv_metadata, sizeof(gst_buffer_info_meta->info.m_enc_mv_metadata) );
-
-    //memcpy( &gst_buffer_info_meta->info.m_enc_mv_metadata.rec_mv_info[0], &buffer_info->m_enc_mv_metadata.rec_mv_info[0], gst_buffer_info_meta->info.m_enc_mv_metadata.bufSize );
-    
-    //if (buffer_info->m_enc_mv_metadata)
-        //{
-        //memcpy( &gst_buffer_info_meta->info.m_enc_mv_metadata, &enc_mv_metadata, sizeof(gst_buffer_info_meta->info.m_enc_mv_metadata)); // struct of buffer_info.m_enc_mv_metadata and enc_mv_metadata must be same
-        //memcpy (&gst_buffer_info_meta->info.m_enc_mv_metadata, &buffer_info->m_enc_mv_metadata, sizeof (gst_buffer_info_meta->info.m_enc_mv_metadata));
-      //  }
 
     return gst_buffer_info_meta;
 }
