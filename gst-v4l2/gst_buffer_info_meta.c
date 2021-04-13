@@ -43,6 +43,8 @@ void AllocateMyMetaData( GstBufferInfo *pBufferInfo, v4l2_ctrl_videoenc_outputbu
                     int nMaxSize = sizeof(pBufferInfo->m_enc_mv_metadata.rec_mv_info);
                     if (nMaxSize >= p_meta_MV->bufSize)   // buffer must be sufficient
                         {
+                    //g_print ("AllocateMyMetaData - nMaxSize=%d x %d\n", nMaxSize, p_meta_MV->bufSize );
+                
                         pBufferInfo->m_enc_mv_metadata.bufSize = p_meta_MV->bufSize;
                         memcpy( &pBufferInfo->m_enc_mv_metadata.rec_mv_info[0], p_meta_MV->pMVInfo, pBufferInfo->m_enc_mv_metadata.bufSize );
                         pBufferInfo->m_enc_mv_metadata.m_nInfoCount = nInfoCount;

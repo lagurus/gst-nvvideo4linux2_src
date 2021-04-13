@@ -60,6 +60,10 @@ GST_DEBUG_CATEGORY_STATIC (CAT_PERFORMANCE);
 
 #define GST_V4L2_IMPORT_QUARK gst_v4l2_buffer_pool_import_quark ()
 
+static int nMaxX = 0;
+static int nMaxY = 0;
+static int nMinX = 0;
+static int nMinY = 0;
 
 /*
  * GstV4l2BufferPool:
@@ -1450,6 +1454,41 @@ static GstFlowReturn gst_v4l2_buffer_pool_dqbuf (GstV4l2BufferPool * pool, GstBu
       //for (i = 0; i < numMVs; i++, pInfo++)
       //  g_print ("%d: mv_x=%d mv_y=%d weight=%d\n ", i, pInfo->mv_x,
       //      pInfo->mv_y, pInfo->weight);
+
+    /*MVInfo *pInfo = enc_mv_metadata.pMVInfo;    // no info on screen
+
+    for (i = 0; i < numMVs; i++, pInfo++)
+        {
+        int nShow = 0;
+                                      
+          if (pInfo->mv_x > nMaxX)
+              {
+              nMaxX = pInfo->mv_x;
+              nShow = 1;
+              }
+          
+          if (pInfo->mv_y > nMaxY)
+              {
+              nMaxY = pInfo->mv_y;
+              nShow = 1;
+              }
+          
+          if (pInfo->mv_x < nMinX)
+              {
+              nMinX = pInfo->mv_x;
+              nShow = 1;
+              }
+          
+          if (pInfo->mv_y < nMinY)
+              {
+              nMinY = pInfo->mv_y;
+              nShow = 1;
+              }
+          
+          
+          if (nShow)
+            g_print( "(%d,%d,%d)MAX(%d,%d,%d,%d)", pInfo->mv_x, pInfo->mv_y, pInfo->weight, nMaxX, nMaxY, nMinX, nMinY);  // (-180,80,3)(-440,784,1)
+        }*/
 
     // ------------------- META CHANGES -------------------
 
