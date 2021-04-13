@@ -4,7 +4,7 @@ build with:
 
 ```
 mkdir build
-cd build</code>
+cd build
 cmake ../
 ```
 
